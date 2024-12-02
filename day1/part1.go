@@ -1,4 +1,4 @@
-package main
+package day1
 
 import (
 	"bufio"
@@ -8,17 +8,12 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/TTF5/AoC2024/utility"
 )
 
-func IAbs(x int64) int64 {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
-
-func main2() {
-	file, err := os.Open("input.txt")
+func Day1Part1() {
+	file, err := os.Open("day1/input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -57,7 +52,7 @@ func main2() {
 	sum := 0
 
 	for idx, num := range list1 {
-		dist := IAbs(num - list2[idx])
+		dist := utility.IAbs(num - list2[idx])
 		sum += int(dist)
 	}
 
