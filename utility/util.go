@@ -1,5 +1,9 @@
 package utility
 
+type Point struct {
+	X, Y int
+}
+
 func IAbs(x int64) int64 {
 	if x < 0 {
 		return -x
