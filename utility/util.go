@@ -18,3 +18,20 @@ func SliceMap[Src any, Dest any](s []Src, f func(Src) Dest) []Dest {
 	}
 	return result
 }
+
+func GenerateCombinations[Value any](alphabet []Value, length int) <-chan []Value {
+	ch := make(chan []Value)
+	go func() {
+		defer close(ch)
+		if length == 0 {
+			ch <- make([]Value, 0)
+		} else {
+			for _, v := range alphabet {
+				for comb := range GenerateCombinations(alphabet, length-1) {
+					ch <- append([]Value{v}, comb...)
+				}
+			}
+		}
+	}()
+	return ch
+}
