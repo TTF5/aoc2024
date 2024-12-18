@@ -38,11 +38,5 @@ func Day2Part2() {
 }
 
 func checkLevels(diffs []int64, skipIdx int, idx int, ascending bool) bool {
-	if idx == 0 {
-		return checkLevels(diffs, idx, idx+1)
-	}
 
-	if diffs[idx] > 0 {
-		return checkLevels(diffs, idx, idx+1)
-	}
 }
