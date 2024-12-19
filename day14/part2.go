@@ -2,9 +2,12 @@ package day14
 
 import (
 	"fmt"
+	"image"
+	"image/color"
 	"os"
-	"os/exec"
-	"time"
+	"strconv"
+
+	"github.com/sergeymakinen/go-bmp"
 )
 
 func PrintMap(robots []Robot, width int, height int) {
@@ -27,11 +30,24 @@ func PrintMap(robots []Robot, width int, height int) {
 	}
 }
 
+func robotsToBitmap(seconds int, robots []Robot, width int, height int) {
+	var bitmap = image.NewPaletted(image.Rect(0, 0, width, height), []color.Color{color.Black, color.White})
+
+	for _, robot := range robots {
+		bitmap.Set(robot.x, robot.y, color.White)
+	}
+
+	filename := "day14/images/second_" + strconv.Itoa(seconds) + ".bmp"
+
+	w, _ := os.Create(filename)
+	bmp.Encode(w, bitmap)
+}
+
 func Day14Part2() {
 	var robots []Robot
 	var width int
 	var height int
-	seconds := 500
+	seconds := 10000
 	example := false
 
 	if example {
@@ -45,14 +61,9 @@ func Day14Part2() {
 	}
 
 	for s := 0; s < seconds; s++ {
-		cmd := exec.Command("cmd", "/c", "cls") //Windows example, its tested
-		cmd.Stdout = os.Stdout
-		cmd.Run()
 		for i, robot := range robots {
 			robots[i] = moveRobot(robot, width, height, 1)
 		}
-		PrintMap(robots, width, height)
-		time.Sleep(100 * time.Millisecond)
+		robotsToBitmap(s, robots, width, height)
 	}
-
 }

@@ -1,6 +1,6 @@
 package main
 
-import "github.com/TTF5/AoC2024/day8"
+import "github.com/TTF5/AoC2024/day9"
 
 func main() {
 	// day1.day1part1()
@@ -25,7 +25,9 @@ func main() {
 	// day7.Day7Part2()
 
 	// day8.Day8Part1()
-	day8.Day8Part2()
+	// day8.Day8Part2()
+
+	day9.Day9Part1()
 
 	// day14.Day14Part1()
 	// day14.Day14Part2()
